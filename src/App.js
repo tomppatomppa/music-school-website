@@ -1,25 +1,112 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useRef, useState } from 'react'
 
-function App() {
+import MainPrice from './components/MainPrice'
+import MainContent from './components/MainContent'
+import MainTeacher from './components/MainTeacher'
+import Modal from './components/Modal'
+import { useWindowScrollPosition } from './hooks/useWindowScrollPosition'
+const HamburgerButton = ({ onClick, menuOpen }) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <button
+      onClick={onClick}
+      className={`absolute ${
+        menuOpen ? 'rotate-90' : 'rotate-0'
+      } md:hidden right-2`}
+    >
+      <svg viewBox="0 0 100 80" width="20" height="20">
+        <rect width="100" height="20"></rect>
+        <rect y="30" width="100" height="20"></rect>
+        <rect y="60" width="100" height="20"></rect>
+      </svg>
+    </button>
+  )
+}
+function App() {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
+  const { scrollY } = useWindowScrollPosition()
+
+  const priceRef = useRef(null)
+
+  function handleBackClick() {
+    priceRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const handleOpenModal = () => {
+    setModalOpen(true)
+  }
+  const handleCloseModal = () => {
+    setModalOpen(false)
+  }
+  useEffect(() => {
+    window.addEventListener(
+      'resize',
+      () => window.innerWidth >= 960 && setMenuOpen(false)
+    )
+  }, [])
+
+  const id = '1ygaXp5llsmFGNm0aQiqEsBO_UGg_cwOR'
+
+  return (
+    <div className="App  text-center grid grid-rows-[auto,1fr,auto] ">
+      <Modal open={modalOpen} closeModal={handleCloseModal} />
+      <header className="bg-zinc-200   w-full items-center col-span-full flex flex-col md:flex-row  p-4">
+        <div className="flex grow">LOGO</div>
+        <div
+          className={`${
+            menuOpen ? 'visible' : 'absolute md:relative invisible md:visible'
+          } md:visible gap-6 flex flex-col md:flex-row  mt-4 md:mt-0`}
         >
-          Learn React
-        </a>
+          <button>Opetus</button>
+          <button>Tietoa</button>
+          <button onClick={handleBackClick}>Hinnasto</button>
+        </div>
+        <HamburgerButton
+          menuOpen={menuOpen}
+          onClick={() => setMenuOpen(!menuOpen)}
+        />
       </header>
+      <section className="section h-[90vh] justify-center ">
+        <div className=" flex flex-col lg:flex-row h-full justify-center rounded-md ">
+          <div className="bg-zinc-100 gap-2 flex justify-center basis-1/2 flex-col">
+            <h3 className="font-bold uppercase text-6xl">Kitarakoulu</h3>
+            <div className="font-bold ">Tomi West</div>
+            <p className="my-2">
+              Kitaraopetusta kaiken ikäisille. Aloita jo tänään
+            </p>
+          </div>
+          <div className="bg-zinc-50 basis-1/2 flex items-center">
+            <img
+              alt="Loading"
+              className="object-cover w-full h-full"
+              src={`https://drive.google.com/uc?id=${id}`}
+            ></img>
+          </div>
+        </div>
+      </section>
+
+      <MainContent />
+      <MainTeacher />
+
+      <MainPrice handleOpenModal={handleOpenModal} />
+      <div ref={priceRef} className="bg-blue-200 col-span-full">
+        Footer
+      </div>
+      <button
+        className={`${
+          scrollY > 1980 ? 'visible' : 'invisible'
+        } fixed flex justify-end text-white bottom-12  w-full animate-bounce`}
+        onClick={() => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          })
+        }}
+      >
+        Takaisin ylös
+      </button>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
