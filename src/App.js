@@ -5,7 +5,6 @@ import MainContent from './components/MainContent'
 import MainTeacher from './components/MainTeacher'
 import Modal from './components/Modal'
 import { useWindowScrollPosition } from './hooks/useWindowScrollPosition'
-import { useEscapeKey } from './hooks/useEscapeKey'
 
 const HamburgerButton = ({ onClick, menuOpen }) => {
   return (
@@ -41,7 +40,7 @@ function App() {
   const handleCloseModal = () => {
     setModalOpen(false)
   }
-  useEscapeKey(handleCloseModal)
+
   useEffect(() => {
     window.addEventListener(
       'resize',

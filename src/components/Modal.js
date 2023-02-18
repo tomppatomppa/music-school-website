@@ -1,9 +1,16 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import LoadingSpinner from './LoadingSpinner'
+import { useOutsideClick } from '../hooks/useOutsideClick'
+import { useEscapeKey } from '../hooks/useEscapeKey'
 
 const Modal = ({ open, closeModal }) => {
   const [isSubmitting, setSubmitting] = useState(false)
+
+  const ref = useRef(null)
+
+  useOutsideClick(closeModal, ref)
+  useEscapeKey(closeModal)
 
   const handleSubmitForm = (values) => {
     console.log('send form', values)
@@ -49,7 +56,10 @@ const Modal = ({ open, closeModal }) => {
           }}
         >
           {({ isSubmitting }) => (
-            <Form className="grid  text-left   bg-zinc-200 grid-cols-[auto,1fr] items-center  gap-y-3 gap-x-10 max-w-lg my-8 mx-auto p-5 rounded-md shadow-lg ">
+            <Form
+              ref={ref}
+              className="grid  text-left   bg-zinc-200 grid-cols-[auto,1fr] items-center  gap-y-3 gap-x-10 max-w-lg my-8 mx-auto p-5 rounded-md shadow-lg "
+            >
               <label className="whitespace-nowrap"> Sähköposti </label>
               <LoadingSpinner enabled={isSubmitting} />
               <div>
