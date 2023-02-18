@@ -5,6 +5,8 @@ import MainContent from './components/MainContent'
 import MainTeacher from './components/MainTeacher'
 import Modal from './components/Modal'
 import { useWindowScrollPosition } from './hooks/useWindowScrollPosition'
+import { useEscapeKey } from './hooks/useEscapeKey'
+
 const HamburgerButton = ({ onClick, menuOpen }) => {
   return (
     <button
@@ -24,6 +26,7 @@ const HamburgerButton = ({ onClick, menuOpen }) => {
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
+
   const { scrollY } = useWindowScrollPosition()
 
   const priceRef = useRef(null)
@@ -38,6 +41,7 @@ function App() {
   const handleCloseModal = () => {
     setModalOpen(false)
   }
+  useEscapeKey(handleCloseModal)
   useEffect(() => {
     window.addEventListener(
       'resize',
@@ -48,13 +52,14 @@ function App() {
   const id = '1ygaXp5llsmFGNm0aQiqEsBO_UGg_cwOR'
 
   return (
-    <div className="App  text-center grid grid-rows-[auto,1fr,auto] ">
+    <div className="App   text-center grid grid-rows-[auto,1fr,auto] ">
       <Modal open={modalOpen} closeModal={handleCloseModal} />
-      <header className="bg-zinc-200   w-full items-center col-span-full flex flex-col md:flex-row  p-4">
+      <header className="bg-zinc-200 w-full items-center col-span-full flex flex-col md:flex-row  p-4">
         <div className="flex grow">LOGO</div>
+
         <div
           className={`${
-            menuOpen ? 'visible' : 'absolute md:relative invisible md:visible'
+            menuOpen ? 'visible' : 'absolute  md:relative invisible md:visible'
           } md:visible gap-6 flex flex-col md:flex-row  mt-4 md:mt-0`}
         >
           <button>Opetus</button>
@@ -66,28 +71,33 @@ function App() {
           onClick={() => setMenuOpen(!menuOpen)}
         />
       </header>
-      <section className="section h-[90vh] justify-center ">
-        <div className=" flex flex-col lg:flex-row h-full justify-center rounded-md ">
-          <div className="bg-zinc-100 gap-2 flex justify-center basis-1/2 flex-col">
-            <h3 className="font-bold uppercase text-6xl">Kitarakoulu</h3>
-            <div className="font-bold ">Tomi West</div>
-            <p className="my-2">
-              Kitaraopetusta kaiken ikäisille. Aloita jo tänään
+      <section className="section bg-gradient-to-r  from-blue-200 via-fuchsia-50 to-white h-[90vh] justify-center ">
+        <div className=" flex  flex-col lg:flex-row h-full justify-center rounded-md ">
+          <div className="bg-blue-100 text-transparent  bg-clip-text bg-gradient-to-r from-blue-400 to-gray-600 gap-2 flex justify-center basis-1/2 flex-col ">
+            <h1 className="uppercase text-5xl sm:text-6xl ">Kitarakoulu</h1>
+            <p
+              className={`bg-black ${
+                scrollY > 0 ? 'w-36' : 'w-52'
+              } self-center h-1 transition-all duration-500`}
+            ></p>
+            <h3 className=" text-gray-600 text-2xl uppercase tracking-widest">
+              Plektra
+            </h3>
+            <p className="my-2 text-gray-500 tracking-tight">
+              Laadukasta Kitaraopetusta kaiken ikäisille.
             </p>
           </div>
-          <div className="bg-zinc-50 basis-1/2 flex items-center">
+          <div className="  basis-1/2 flex items-center ">
             <img
-              alt="Loading"
-              className="object-cover w-full h-full"
+              alt="Guitar Student"
+              className="object-cover w-full h-full  "
               src={`https://drive.google.com/uc?id=${id}`}
             ></img>
           </div>
         </div>
       </section>
-
       <MainContent />
       <MainTeacher />
-
       <MainPrice handleOpenModal={handleOpenModal} />
       <div ref={priceRef} className="bg-blue-200 col-span-full">
         Footer
@@ -95,7 +105,7 @@ function App() {
       <button
         className={`${
           scrollY > 1980 ? 'visible' : 'invisible'
-        } fixed flex justify-end text-white bottom-12  w-full animate-bounce`}
+        } fixed flex justify-end text-black bottom-12  right-0 animate-bounce`}
         onClick={() => {
           window.scrollTo({
             top: 0,

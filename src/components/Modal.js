@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import LoadingSpinner from './LoadingSpinner'
+
 const Modal = ({ open, closeModal }) => {
   const [isSubmitting, setSubmitting] = useState(false)
 
@@ -11,8 +12,8 @@ const Modal = ({ open, closeModal }) => {
   return (
     <div
       className={`${
-        open ? 'visible' : 'invisible'
-      } fixed p-4  h-screen w-full backdrop-blur-md text-black z-50 `}
+        open ? 'visible' : 'hidden'
+      } fixed   z-50  h-full w-full backdrop:bg-black   backdrop-blur-sm text-black`}
     >
       <div className="flex justify-center ">
         <Formik
@@ -40,13 +41,7 @@ const Modal = ({ open, closeModal }) => {
             setSubmitting(true)
             setTimeout(() => {
               handleSubmitForm(values)
-              alert(
-                JSON.stringify(
-                  { title: 'Yhteydenotto pyyntö lähetetty', ...values },
-                  null,
-                  2
-                )
-              )
+              alert(JSON.stringify('Yhteydenotto pyyntö lähetetty', null, 2))
               setSubmitting(false)
               resetForm()
               closeModal()
@@ -54,13 +49,13 @@ const Modal = ({ open, closeModal }) => {
           }}
         >
           {({ isSubmitting }) => (
-            <Form className="grid  text-left   bg-zinc-200 grid-cols-[auto,1fr] items-center  gap-y-3 gap-x-12 max-w-lg my-8 mx-auto p-8 rounded-md shadow-lg border-gray-300">
+            <Form className="grid  text-left   bg-zinc-200 grid-cols-[auto,1fr] items-center  gap-y-3 gap-x-10 max-w-lg my-8 mx-auto p-5 rounded-md shadow-lg ">
               <label className="whitespace-nowrap"> Sähköposti </label>
               <LoadingSpinner enabled={isSubmitting} />
               <div>
                 <Field
                   placeholder="Sähköposti"
-                  className="py-2 px-3 border border-gray-300 rounded"
+                  className="py-2 px-3 border border-gray-300 rounded-md"
                   type="email"
                   name="email"
                 />
@@ -73,7 +68,7 @@ const Modal = ({ open, closeModal }) => {
               <div>
                 <Field
                   placeholder="Nimi"
-                  className="flex flex-col py-2 px-3 border border-gray-300 rounded"
+                  className="flex flex-col py-2 px-3 border border-gray-300 rounded-md"
                   type="name"
                   name="name"
                 />
@@ -85,7 +80,7 @@ const Modal = ({ open, closeModal }) => {
               <div className="col-start-1 col-end-3 text-start ">
                 <Field
                   as="textarea"
-                  className="w-full "
+                  className="w-full rounded-md "
                   name="message"
                   type="message"
                   placeholder="Your Message"

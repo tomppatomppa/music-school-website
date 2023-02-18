@@ -23,7 +23,7 @@ const MainPrice = ({ handleOpenModal }) => {
         <p>Muut tunnit voidaan erikseen kuten esimerkiksi ryhmätunnit</p>
 
         <button onClick={handleOpenModal} className=" w-full" id="sign-up">
-          Lähetä tästä
+          Ota yhteyttä
         </button>
       </div>
       <div className="why bg-zinc-300 ">
