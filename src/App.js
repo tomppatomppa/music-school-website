@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import MainPrice from './components/MainPrice'
 import MainContent from './components/MainContent'
 import MainTeacher from './components/MainTeacher'
 import Modal from './components/Modal'
 import { useWindowScrollPosition } from './hooks/useWindowScrollPosition'
+import useScroll from './hooks/useScroll'
 
 const HamburgerButton = ({ onClick, menuOpen }) => {
   return (
@@ -25,14 +26,9 @@ const HamburgerButton = ({ onClick, menuOpen }) => {
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
+  const { setDirection } = useScroll()
 
   const { scrollY } = useWindowScrollPosition()
-
-  const priceRef = useRef(null)
-
-  function handleBackClick() {
-    priceRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }
 
   const handleOpenModal = () => {
     setModalOpen(true)
@@ -53,31 +49,40 @@ function App() {
   return (
     <div className="App   text-center grid grid-rows-[auto,1fr,auto] ">
       <Modal open={modalOpen} closeModal={handleCloseModal} />
-      <header className="bg-zinc-200 w-full items-center col-span-full flex flex-col md:flex-row  p-4">
-        <div className="flex grow">LOGO</div>
+      <nav
+        className={`${
+          scrollY > 400 ? '-translate-y-64 ' : ''
+        } transition-all duration-200 border-b-[1px] bg-slate-400 bg-opacity-20 z-900 border-black  fixed backdrop-blur-sm w-full items-center col-span-full flex flex-col md:flex-row  p-4`}
+      >
+        <div className="flex grow ">LOGO</div>
 
         <div
           className={`${
-            menuOpen ? 'visible' : 'absolute  md:relative invisible md:visible'
-          } md:visible gap-6 flex flex-col md:flex-row  mt-4 md:mt-0`}
+            menuOpen ? 'visible' : 'absolute md:relative invisible md:visible'
+          } md:visible transition-all duration-200 text-gray-600 gap-6 flex flex-col md:flex-row  mt-4 md:mt-0 text-lg`}
         >
-          <button>Opetus</button>
-          <button>Tietoa</button>
-          <button onClick={handleBackClick}>Hinnasto</button>
+          <button className="hover:text-black ">Opetus</button>
+          <button className="hover:text-black ">Tietoa</button>
+          <button
+            className="hover:text-black "
+            onClick={() => setDirection('bottom')}
+          >
+            Hinnasto
+          </button>
         </div>
         <HamburgerButton
           menuOpen={menuOpen}
           onClick={() => setMenuOpen(!menuOpen)}
         />
-      </header>
-      <section className="section bg-gradient-to-r  from-blue-200 via-fuchsia-50 to-white h-[90vh] justify-center ">
-        <div className=" flex  flex-col lg:flex-row h-full justify-center rounded-md ">
-          <div className="bg-blue-100 text-transparent  bg-clip-text bg-gradient-to-r from-blue-400 to-gray-600 gap-2 flex justify-center basis-1/2 flex-col ">
-            <h1 className="uppercase text-5xl sm:text-6xl ">Kitarakoulu</h1>
+      </nav>
+      <section className="section bg-gradient-to-r from-blue-200 via-fuchsia-50 to-white h-[90vh] justify-center ">
+        <article className=" flex flex-col lg:flex-row h-full justify-center rounded-md ">
+          <header className="bg-blue-100 text-transparent bg-clip-text bg-gradient-to-l from-blue-400 to-gray-600 gap-2 flex justify-center basis-1/2 flex-col ">
+            <h1 className="uppercase text-5xl sm:text-6xl">Kitarakoulu</h1>
             <p
               className={`bg-black ${
                 scrollY > 0 ? 'w-36' : 'w-52'
-              } self-center h-1 transition-all duration-500`}
+              } self-center h-[2px] transition-all duration-500 font-sm `}
             ></p>
             <h3 className=" text-gray-600 text-2xl uppercase tracking-widest">
               Plektra
@@ -85,32 +90,25 @@ function App() {
             <p className="my-2 text-gray-500 tracking-tight">
               Laadukasta Kitaraopetusta kaiken ikäisille.
             </p>
-          </div>
-          <div className="  basis-1/2 flex items-center ">
+          </header>
+          <figure className="basis-1/2 flex items-center ">
             <img
               alt="Guitar Student"
               className="object-cover w-full h-full  "
               src={`https://drive.google.com/uc?id=${id}`}
             ></img>
-          </div>
-        </div>
+          </figure>
+        </article>
       </section>
       <MainContent />
       <MainTeacher />
       <MainPrice handleOpenModal={handleOpenModal} />
-      <div ref={priceRef} className="bg-blue-200 col-span-full">
-        Footer
-      </div>
+      <div className="bg-blue-200 col-span-full">Footer</div>
       <button
         className={`${
           scrollY > 1980 ? 'visible' : 'invisible'
         } fixed flex justify-end text-black bottom-12  right-0 animate-bounce`}
-        onClick={() => {
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-          })
-        }}
+        onClick={() => setDirection('top')}
       >
         Takaisin ylös
       </button>

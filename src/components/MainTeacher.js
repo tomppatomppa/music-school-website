@@ -13,22 +13,19 @@ const MainTeacher = () => {
   return (
     <section className="bg-zinc-200 w-full md:h-[90vh] flex md:items-center  ">
       <div className="container ">
-        <div className="flex flex-col md:flex-row-reverse items-center ">
-          <div className="flex basis-1/2">
+        <div className="flex flex-col md:flex-row-reverse items-center gap-2 ">
+          <figure className="flex basis-1/2 ">
             <img
               className="w-96 md:w-full"
               src={googleBaseUrl + portrait}
-              alt=""
+              alt="Portrait"
             />
-          </div>
-          <div className="flex basis-1/2 self-end ">
-            <div className="text-2xl mt-2">
-              {description_fi}
-              <p className="mt-6 text-xl text-center">
-                <strong>Tomi West</strong>
-              </p>
-            </div>
-
+          </figure>
+          <article className="flex flex-col basis-1/2 self-end ">
+            <blockquote className="text-2xl mt-2">{description_fi}</blockquote>
+            <p className="mt-6 text-xl text-center">
+              <strong>Tomi West</strong>
+            </p>
             {/* <div>
               <div className="mt-6  sm:mt-8 sm:flex sm:justify-center">
                 <div className="relative bg-zinc-400  overflow-hidden py-1.5 px-4 text-sm leading-6 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
@@ -42,7 +39,7 @@ const MainTeacher = () => {
                 </div>
               </div>
             </div> */}
-          </div>
+          </article>
         </div>
       </div>
     </section>
