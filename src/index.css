@@ -22,7 +22,7 @@
     @apply font-bold text-3xl text-zinc-600;
   }
   h3 {
-    @apply font-bold text-xl;
+    @apply font-light text-xl;
   }
   .component-header h3 {
     @apply my-4;
@@ -34,7 +34,7 @@
     @apply inline-block mt-2.5 align-middle pl-3;
   }
   #sign-up {
-    @apply mt-6 block py-3 px-6 text-center bg-zinc-600 rounded font-bold;
+    @apply mt-6 block py-3 px-6 text-center bg-blue-300 rounded font-bold;
   }
   p {
     @apply mt-1;

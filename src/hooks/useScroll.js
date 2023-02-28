@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const useScroll = (action, ref = null) => {
   const [direction, setDirection] = useState(action)
