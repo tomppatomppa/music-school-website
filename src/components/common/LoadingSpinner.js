@@ -27,5 +27,4 @@ const LoadingSpinner = ({ enabled }) => {
     </div>
   )
 }
-
 export default LoadingSpinner

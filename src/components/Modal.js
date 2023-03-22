@@ -5,7 +5,6 @@ import { useEscapeKey } from '../hooks/useEscapeKey'
 
 const Modal = ({ open, closeModal, children }) => {
   const ref = useRef(null)
-
   useOutsideClick(closeModal, ref)
   useEscapeKey(closeModal)
 
@@ -13,7 +12,7 @@ const Modal = ({ open, closeModal, children }) => {
     <div
       className={`${
         open ? 'visible' : 'hidden'
-      } fixed   z-50  h-full w-full backdrop:bg-black   backdrop-blur-sm text-black`}
+      } fixed z-50 h-full w-full backdrop:bg-black bg-black bg-opacity-25 backdrop-blur-sm text-black`}
     >
       <div className="flex justify-center ">{children}</div>
     </div>

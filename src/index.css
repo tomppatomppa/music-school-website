@@ -18,8 +18,11 @@
   .why {
     @apply text-white;
   }
+  h1 {
+    @apply text-4xl text-zinc-600;
+  }
   h2 {
-    @apply font-bold text-3xl text-zinc-600;
+    @apply text-xl text-zinc-600;
   }
   h3 {
     @apply font-light text-xl;
@@ -41,6 +44,12 @@
   }
 
   .color-primary {
-    @apply bg-red-400;
+    @apply bg-blue-400;
+  }
+  .bg-primary {
+    @apply bg-zinc-300;
+  }
+  .text-action {
+    @apply text-teal-400;
   }
 }

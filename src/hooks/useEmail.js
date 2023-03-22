@@ -12,7 +12,7 @@ const useEmail = () => {
         values,
         REACT_APP_USER_ID
       )
-      alert(JSON.stringify('Yhteydenotto pyyntö lähetetty', null, 2))
+      alert('Yhteydenotto pyyntö lähetetty', null, 2)
     } catch (e) {
       console.log(e)
     }

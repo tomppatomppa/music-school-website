@@ -1,4 +1,4 @@
-export const HamburgerButton = ({ onClick, menuOpen }) => {
+const HamburgerButton = ({ onClick, menuOpen }) => {
   return (
     <button
       onClick={onClick}
@@ -14,3 +14,4 @@ export const HamburgerButton = ({ onClick, menuOpen }) => {
     </button>
   )
 }
+export default HamburgerButton
