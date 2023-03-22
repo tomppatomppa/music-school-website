@@ -4,7 +4,7 @@ import { ErrorMessage, Field, Form } from 'formik'
 const ContactForm = ({ isSubmitting }) => {
   return (
     <Form
-      className={`grid text-left grid-cols-[auto,1fr] items-center  gap-y-3 gap-x-10 max-w-lg my-8 mx-auto p-5 rounded-md `}
+      className={`grid grid-cols-[auto,1fr] items-center gap-y-3 gap-x-10 max-w-lg  mx-auto rounded-md `}
     >
       <label className="whitespace-nowrap flex-1 ">Sähköposti </label>
       <div>
@@ -37,7 +37,7 @@ const ContactForm = ({ isSubmitting }) => {
           className="w-full rounded-md p-2"
           name="message"
           type="message"
-          placeholder="Your Message"
+          placeholder="Viesti"
           rows="4"
         />
         <ErrorMessage name="message">
@@ -47,7 +47,7 @@ const ContactForm = ({ isSubmitting }) => {
       <div className="col-start-1 col-span-2   text-white font-bold ">
         <div className="w-full flex gap-4 ">
           <button
-            className="bg-primary grow py-2 "
+            className="bg-primary grow py-2 rounded-full"
             type="submit"
             disabled={isSubmitting}
           >

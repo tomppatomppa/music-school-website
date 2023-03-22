@@ -52,4 +52,10 @@
   .text-action {
     @apply text-teal-400;
   }
+  .text-primary {
+    @apply text-black;
+  }
+  .text-secondary {
+    @apply text-gray-600;
+  }
 }

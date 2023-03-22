@@ -4,7 +4,7 @@ import { useWindowScrollPosition } from '../hooks/useWindowScrollPosition'
 
 import Content from '../components/Content'
 import About from '../components/About'
-
+import { FaGuitar } from 'react-icons/fa'
 import Teacher from '../components/Teacher'
 import Products from '../components/Products'
 import { ContactSection } from '../components/ContactSection'
@@ -25,17 +25,18 @@ const Home = () => {
         <Divider />
         <About />
         <Products />
+        <Teacher />
       </section>
-      <Teacher />
       <LayeredWave />
       <ContactSection />
       <button
         className={`${
           scrollY > 1980 ? 'visible' : 'invisible'
-        } fixed flex justify-end  text-black bottom-12  right-0 animate-bounce`}
+        } fixed flex justify-end  text-black bottom-12 flex-col right-12 animate-bounce`}
         onClick={() => setDirection('top')}
       >
-        Takaisin ylös
+        <FaGuitar size={34} />
+        Ylös
       </button>
     </div>
   )
