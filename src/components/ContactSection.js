@@ -4,7 +4,7 @@ import { Contact } from './Contact'
 import { FaPhone, FaEnvelopeOpen } from 'react-icons/fa'
 export const ContactSection = () => {
   return (
-    <section className="bg-orange p-24 flex flex-col">
+    <section className="bg-orange p-5 md:p-24 ">
       <Title title="OTA YHTEYTTÄ" description={'ETKÖ LÖYTÄNYT ETSIMÄÄSI?'}>
         Jäikö kysyttävää? Voit lähettää viestin alla olevalla lomakkeella, tai
         olla yhteydessä sähköpostitse tai puhelimitse.
@@ -21,8 +21,9 @@ export const ContactSection = () => {
           </p>
           <p className="my-12">MA-PE 09:00 - 16:00</p>
         </div>
-
-        <Contact />
+        <div className="flex-1 mx-auto ">
+          <Contact />
+        </div>
       </section>
     </section>
   )

@@ -17,7 +17,7 @@ const Home = () => {
   const { scrollY } = useWindowScrollPosition()
 
   return (
-    <div className="App bg-zinc-100 z-10  ">
+    <div className="App  bg-zinc-100 z-10 ">
       <Hero />
       <LayeredWave />
       <section className="p-5 max-w-7xl mx-auto text-left">
@@ -32,7 +32,7 @@ const Home = () => {
       <button
         className={`${
           scrollY > 1980 ? 'visible' : 'invisible'
-        } fixed flex justify-end  text-black bottom-12 flex-col right-12 animate-bounce`}
+        } fixed flex justify-end  text-black bottom-12 flex-col right-4 animate-bounce`}
         onClick={() => setDirection('top')}
       >
         <FaGuitar size={34} />
